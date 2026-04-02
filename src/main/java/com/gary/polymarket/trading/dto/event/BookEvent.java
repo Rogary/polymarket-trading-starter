@@ -1,0 +1,23 @@
+package com.gary.polymarket.trading.dto.event;
+
+import com.alibaba.fastjson2.annotation.JSONField;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.List;
+
+@Data
+public class BookEvent implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String market;
+
+    @JSONField(name = "asset_id")
+    private String assetId;
+
+    private List<PriceLevel> bids;
+    private List<PriceLevel> asks;
+    private String timestamp;
+    private String hash;
+}
