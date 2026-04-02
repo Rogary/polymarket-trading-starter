@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.x3.polymarket.trading.PolymarketTradingAutoConfiguration
+com.gary.polymarket.trading.PolymarketTradingAutoConfiguration

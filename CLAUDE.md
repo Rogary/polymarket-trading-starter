@@ -6,7 +6,7 @@
 
 封装 Polymarket CLOB（中央限价订单簿）交易 API 的 Spring Boot Starter。提供自动配置的 EIP-712 订单签名、双层认证（L1 钱包 + L2 HMAC）、REST 交易和 WebSocket 行情数据等 Bean。目标网络为 Polygon 主网（chain ID 137）。
 
-GAV: `com.x3:polymarket-trading-spring-boot-starter:1.0.0`
+GAV: `com.gary:polymarket-trading-spring-boot-starter:1.0.0`
 
 ## 构建
 

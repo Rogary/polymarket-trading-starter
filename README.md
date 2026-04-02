@@ -8,7 +8,7 @@ Polymarket CLOB 交易 API 的 Spring Boot Starter —— 提供自动配置的 
 
 ```xml
 <dependency>
-    <groupId>com.x3</groupId>
+    <groupId>com.gary</groupId>
     <artifactId>polymarket-trading-spring-boot-starter</artifactId>
     <version>1.0.0</version>
 </dependency>
