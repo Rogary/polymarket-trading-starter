@@ -13,7 +13,7 @@
 
     <groupId>com.gary</groupId>
     <artifactId>polymarket-trading-spring-boot-starter</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>polymarket-trading-spring-boot-starter</name>
@@ -74,6 +74,11 @@
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/Rogary/polymarket-trading-starter</url>
         </repository>
+        <snapshotRepository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Rogary/polymarket-trading-starter</url>
+        </snapshotRepository>
     </distributionManagement>
 
 </project>
