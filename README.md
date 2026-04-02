@@ -1,10 +1,10 @@
 # polymarket-trading-spring-boot-starter
 
-Spring Boot Starter for Polymarket CLOB Trading API — provides auto-configured EIP-712 order signing, two-tier authentication (L1 wallet + L2 HMAC), REST trading client, and WebSocket market data support on Polygon mainnet.
+Polymarket CLOB 交易 API 的 Spring Boot Starter —— 提供自动配置的 EIP-712 订单签名、双层认证（L1 钱包 + L2 HMAC）、REST 交易客户端，以及基于 Polygon 主网的 WebSocket 行情数据支持。
 
-## Quick Start
+## 快速开始
 
-### 1. Add Dependency
+### 1. 添加依赖
 
 ```xml
 <dependency>
@@ -14,21 +14,21 @@ Spring Boot Starter for Polymarket CLOB Trading API — provides auto-configured
 </dependency>
 ```
 
-### 2. Configure
+### 2. 配置
 
 ```yaml
 polymarket:
   trading:
     private-key: "0xYOUR_PRIVATE_KEY"
-    # Optional: pre-set API credentials to skip L1 derivation
+    # 可选：预设 API 凭证以跳过 L1 派生
     # api-key: ""
     # api-secret: ""
     # api-passphrase: ""
 ```
 
-Setting `private-key` activates the starter. All other properties have sensible defaults.
+设置 `private-key` 即可激活 Starter，其余属性均有合理默认值。
 
-### 3. Use
+### 3. 使用
 
 ```java
 @Autowired
@@ -37,7 +37,7 @@ private PolymarketTradingClient tradingClient;
 @Autowired
 private PolymarketWebSocketManager webSocketManager;
 
-// Place an order
+// 下单
 PlaceOrderRequest request = new PlaceOrderRequest()
         .setTokenId("TOKEN_ID")
         .setSide(Side.BUY)
@@ -46,50 +46,50 @@ PlaceOrderRequest request = new PlaceOrderRequest()
         .setOrderType(OrderType.GTC);
 OrderResponse response = tradingClient.placeOrder(request);
 
-// Subscribe to market data
+// 订阅行情数据
 webSocketManager.subscribeMarket(List.of("ASSET_ID"));
 ```
 
-## Features
+## 功能特性
 
-- **Order Signing** — EIP-712 typed data signing via web3j, supports EOA / POLY_PROXY / GNOSIS_SAFE signature types
-- **L1 Authentication** — Wallet-based ClobAuth signature to derive API credentials from `/auth/derive-api-key`
-- **L2 Authentication** — HMAC-SHA256 request signing on every REST call
-- **REST Trading Client** — Place/cancel orders (single & batch up to 15), query open orders & trades, heartbeat
-- **WebSocket** — Market channel (order books, prices, trades) and User channel (order/trade updates) with auto-reconnect
-- **Heartbeat** — Configurable keep-alive scheduler (default 5s interval)
-- **Spring Boot Integration** — `@ConditionalOnMissingBean` on all beans for easy customization
+- **订单签名** —— 通过 web3j 进行 EIP-712 类型化数据签名，支持 EOA / POLY_PROXY / GNOSIS_SAFE 签名类型
+- **L1 认证** —— 基于钱包的 ClobAuth 签名，从 `/auth/derive-api-key` 派生 API 凭证
+- **L2 认证** —— 每次 REST 请求的 HMAC-SHA256 签名
+- **REST 交易客户端** —— 下单/撤单（单笔和批量，最多 15 笔）、查询活跃订单和成交记录、心跳
+- **WebSocket** —— 行情频道（订单簿、价格变动、成交）和用户频道（订单/成交更新），支持自动重连
+- **心跳** —— 可配置的保活调度器（默认 5 秒间隔）
+- **Spring Boot 集成** —— 所有 Bean 均使用 `@ConditionalOnMissingBean`，方便自定义覆盖
 
-## Configuration Properties
+## 配置属性
 
-All under `polymarket.trading.*`:
+所有属性位于 `polymarket.trading.*` 下：
 
-| Property | Default | Description |
+| 属性 | 默认值 | 说明 |
 |---|---|---|
-| `private-key` | — | **Required.** Hex private key (with or without 0x prefix) |
-| `base-url` | `https://clob.polymarket.com` | CLOB API base URL |
-| `chain-id` | `137` | Polygon mainnet |
-| `signature-type` | `EOA` | `EOA`, `POLY_PROXY`, or `GNOSIS_SAFE` |
-| `funder-address` | — | Required if signature-type is POLY_PROXY or GNOSIS_SAFE |
-| `heartbeat.enabled` | `true` | Enable heartbeat scheduler |
-| `heartbeat.interval` | `5s` | Heartbeat interval |
-| `websocket.enabled` | `true` | Enable WebSocket connections |
-| `websocket.url` | `wss://ws-subscriptions-clob.polymarket.com/ws` | WebSocket endpoint |
-| `websocket.reconnect-interval` | `5s` | Reconnect delay |
-| `websocket.ping-interval` | `10s` | Ping interval |
+| `private-key` | — | **必填。** 十六进制私钥（带或不带 0x 前缀） |
+| `base-url` | `https://clob.polymarket.com` | CLOB API 基础 URL |
+| `chain-id` | `137` | Polygon 主网 |
+| `signature-type` | `EOA` | `EOA`、`POLY_PROXY` 或 `GNOSIS_SAFE` |
+| `funder-address` | — | 当 signature-type 为 POLY_PROXY 或 GNOSIS_SAFE 时必填 |
+| `heartbeat.enabled` | `true` | 启用心跳调度器 |
+| `heartbeat.interval` | `5s` | 心跳间隔 |
+| `websocket.enabled` | `true` | 启用 WebSocket 连接 |
+| `websocket.url` | `wss://ws-subscriptions-clob.polymarket.com/ws` | WebSocket 端点 |
+| `websocket.reconnect-interval` | `5s` | 重连延迟 |
+| `websocket.ping-interval` | `10s` | Ping 间隔 |
 
-## Build
+## 构建
 
 ```bash
 mvn clean install
 ```
 
-Requires Java 11+.
+需要 Java 11+。
 
-## Tech Stack
+## 技术栈
 
 - Java 11, Spring Boot 2.7
-- web3j 4.10.3 (EIP-712 signing)
-- OkHttp3 (HTTP + WebSocket)
-- FastJSON2 (JSON serialization)
+- web3j 4.10.3（EIP-712 签名）
+- OkHttp3（HTTP + WebSocket）
+- FastJSON2（JSON 序列化）
 - Lombok
